@@ -18,16 +18,19 @@ toto = Toto::Server.new do
   # set [:setting], [value]
   #
     set :author,    'Shameer C'                               # blog author
-    set :title,     'Tech blog of Shameer '                   # site title
+    set :title,     'Tech blog of Shameer'                   # site title
+    set :prefix,    'blog' 
   # set :root,      "index"                                   # page to load on /
   # set :date,      lambda {|now| now.strftime("%d/%m/%Y") }  # date format for articles
   # set :markdown,  :smart                                    # use markdown + smart-mode
-  # set :disqus,    'shameerc'                                     # disqus id, or false
+    set :disqus,    'nikhilben'                                     # disqus id, or false
   # set :summary,   :max => 150, :delim => /~/                # length of article summary and delimiter
-  # set :ext,       'txt'                                     # file extension for articles
+    set :ext,       '.html'                                     # file extension for articles
   # set :cache,      28800                                    # cache duration, in seconds
+    set :to_html   do |path, page, ctx|                         # returns an html, from a path & context
+      ERB.new(File.read("#{path}/#{page}.rhtml")).result(ctx)
+    end
 
-  set :date, lambda {|now| now.strftime("%B #{now.day.ordinal} %Y") }
 end
 
 run toto

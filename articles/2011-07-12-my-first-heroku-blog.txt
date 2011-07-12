@@ -1,0 +1,7 @@
+title: My first Heroku post
+author: Shameer
+date: 2011/07/12
+slug: my-first-heroku-blog
+
+Dear friends, 
+This is my first ever article in heroku. Before this I was using 
