@@ -26,13 +26,14 @@ toto = Toto::Server.new do
   # set :summary,   :max => 150, :delim => /~/                # length of article summary and delimiter
   # set :ext,       'txt'                                     # file extension for articles
   # set :cache,      28800                                    # cache duration, in seconds
-   set to_html,    lambda {|path, page, ctx| # returns an html, from a path & context
-        ERB.new(File.read("#{path}/#{page}.rhtml")).result(ctx)
-      }
-
+  
   set :date, lambda {|now| now.strftime("%B #{now.day.ordinal} %Y") }
 end
-
+class Article
+    def path
+      "/#{@config[:prefix]}#{self[:date].strftime("/%Y/%m/%d/#{slug}")}.html".squeeze('/')
+    end
+end
 run toto
 
 
