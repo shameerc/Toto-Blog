@@ -31,7 +31,7 @@ toto = Toto::Server.new do
 end
 class Article
     def path
-      "/#{@config[:prefix]}#{self[:date].strftime("/%Y/%m/%d/#{slug}")}.html".squeeze('/')
+      "/#{@config[:prefix]}#{self[:date].strftime("/%Y/%m/#{slug}.html")}".squeeze('/')
     end
 end
 run toto
