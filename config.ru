@@ -1,5 +1,5 @@
 
-require 'toto'
+require 'toto/lib/toto.rb'
 
 # Rack config
 use Rack::Static, :urls => ['/css', '/js', '/images', '/favicon.ico'], :root => 'public'
@@ -26,14 +26,9 @@ toto = Toto::Server.new do
   # set :summary,   :max => 150, :delim => /~/                # length of article summary and delimiter
   # set :ext,       'txt'                                     # file extension for articles
   # set :cache,      28800                                    # cache duration, in seconds
-  
+  set :suffix, '.html'
+  set :dateformat, '%Y/%m'
   set :date, lambda {|now| now.strftime("%B #{now.day.ordinal} %Y") }
-end
-class Article
-    def path
-      puts "Hi from path"
-      "/#{@config[:prefix]}#{self[:date].strftime("/%Y/%m/#{slug}.html")}".squeeze('/')
-    end
 end
 run toto
 
